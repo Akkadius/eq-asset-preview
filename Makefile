@@ -53,6 +53,7 @@ help: ##@other Show this help.
 #----------------------
 
 build-maps: ##@build Builds JSON file maps
-	tree ./objects -f -J --sort=name > objects-map.json
-	tree ./npc_models -f -J --sort=name > npc-models-map.json
+	tree ./assets/objects -f -J --sort=name > ./maps/objects-map.json
+	tree ./assets/npc_models -f -J --sort=name > ./maps/npc-models-map.json
+	tree ./assets/monograms -f -J --sort=name > ./maps/monograms-map.json
 	@echo "Built maps!"
