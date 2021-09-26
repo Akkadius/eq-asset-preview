@@ -60,4 +60,5 @@ build-maps: ##@build Builds JSON file maps
 	tree ./assets/spell_icons -f -J --sort=name | jq -c > ./maps/spell-icons-map.json
 	tree ./assets/spell_animations -f -J --sort=name | jq -c > ./maps/spell-animations-map.json
 	tree ./assets/expansion-icons-small -f -J --sort=name | jq -c > ./maps/expansion-icons-small-map.json
+	tree ./assets/wallpaper -f -J --sort=name | jq -c > ./maps/wallpapers.json
 	@echo "Built maps!"
