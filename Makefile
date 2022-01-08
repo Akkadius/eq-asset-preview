@@ -61,4 +61,6 @@ build-maps: ##@build Builds JSON file maps
 	tree ./assets/spell_animations -f -J --sort=name | jq -c > ./maps/spell-animations-map.json
 	tree ./assets/expansion-icons-small -f -J --sort=name | jq -c > ./maps/expansion-icons-small-map.json
 	tree ./assets/wallpaper -f -J --sort=name | jq -c > ./maps/wallpapers.json
+	tree ./assets/emitters -f -J --sort=name | jq -c > ./maps/emitters.json
+	sed -i 's/"type":"file",//g' ./maps/*.json
 	@echo "Built maps!"
