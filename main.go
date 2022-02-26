@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/adotout/pack_2d"
+	"github.com/nfnt/resize"
 	"image"
 	"image/draw"
 	_ "image/gif"
@@ -21,8 +22,10 @@ import (
 type config struct {
 	directory       string
 	iconNamePrefix  string
+	iconNameSuffix  string
 	spriteImageFile string
 	spriteCssFile   string
+	spriteSize      uint
 }
 
 const testHtmlTemplate = `<html>
@@ -45,6 +48,38 @@ func main() {
 			iconNamePrefix:  "", // comes from filename already
 			spriteImageFile: "./assets/sprites/item-icons.png",
 			spriteCssFile:   "./assets/sprites/item-icons.css",
+		},
+		{
+			directory:       "./assets/item_icons",
+			iconNamePrefix:  "", // comes from filename already
+			iconNameSuffix:  "-sm",
+			spriteImageFile: "./assets/sprites/item-icons-sm.png",
+			spriteCssFile:   "./assets/sprites/item-icons-sm.css",
+			spriteSize:      13, // needs to relatively match font size
+		},
+		{
+			directory:       "./assets/spell_icons",
+			iconNamePrefix:  "spell-",
+			iconNameSuffix:  "-20",
+			spriteImageFile: "./assets/sprites/spell-icons-20.png",
+			spriteCssFile:   "./assets/sprites/spell-icons-20.css",
+			spriteSize:      20,
+		},
+		{
+			directory:       "./assets/spell_icons",
+			iconNamePrefix:  "spell-",
+			iconNameSuffix:  "-30",
+			spriteImageFile: "./assets/sprites/spell-icons-30.png",
+			spriteCssFile:   "./assets/sprites/spell-icons-30.css",
+			spriteSize:      30,
+		},
+		{
+			directory:       "./assets/spell_icons",
+			iconNamePrefix:  "spell-",
+			iconNameSuffix:  "-40",
+			spriteImageFile: "./assets/sprites/spell-icons-40.png",
+			spriteCssFile:   "./assets/sprites/spell-icons-40.css",
+			spriteSize:      40,
 		},
 		{
 			directory:       "./assets/objects",
@@ -97,6 +132,12 @@ func main() {
 				panic(err)
 			}
 			imgDecoded, _, err := image.Decode(imgReader)
+
+			// if sprite size specified, we are resizing the image
+			if c.spriteSize > 0 {
+				imgDecoded = resize.Resize(c.spriteSize, c.spriteSize, imgDecoded, resize.Lanczos3)
+			}
+
 			packer.AddNewBlock(imgDecoded.Bounds().Max.X, imgDecoded.Bounds().Max.Y, id)
 			images[id] = imgDecoded
 			imageNames[id] = file.Name()
@@ -141,7 +182,7 @@ func main() {
 
 			css += fmt.Sprintf(
 				".%v { background: url('./%v') -%vpx -%vpx; height: %vpx; width: %vpx; display: inline-block; }\n",
-				fmt.Sprintf("%v%v", c.iconNamePrefix, imageName),
+				fmt.Sprintf("%v%v%v", c.iconNamePrefix, imageName, c.iconNameSuffix),
 				filepath.Base(c.spriteImageFile),
 				img.X,
 				img.Y,
@@ -150,7 +191,7 @@ func main() {
 			)
 			html += fmt.Sprintf(
 				"<span class=\"%v\"></span>\n",
-				fmt.Sprintf("%v%v", c.iconNamePrefix, imageName),
+				fmt.Sprintf("%v%v%v", c.iconNamePrefix, imageName, c.iconNameSuffix),
 			)
 		}
 
