@@ -60,6 +60,14 @@ func main() {
 		{
 			directory:       "./assets/spell_icons",
 			iconNamePrefix:  "spell-",
+			iconNameSuffix:  "-12",
+			spriteImageFile: "./assets/sprites/spell-icons-12.png",
+			spriteCssFile:   "./assets/sprites/spell-icons-12.css",
+			spriteSize:      12,
+		},
+		{
+			directory:       "./assets/spell_icons",
+			iconNamePrefix:  "spell-",
 			iconNameSuffix:  "-20",
 			spriteImageFile: "./assets/sprites/spell-icons-20.png",
 			spriteCssFile:   "./assets/sprites/spell-icons-20.css",
