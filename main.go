@@ -156,6 +156,20 @@ func main() {
 			spriteCssFile:        "./assets/sprites/faces.css",
 			spritePercentageSize: .25,
 		},
+		{
+			directory:            "./assets/client-versions",
+			iconNamePrefix:       "client-version-",
+			spriteImageFile:      "./assets/sprites/client-versions.png",
+			spriteCssFile:        "./assets/sprites/client-versions.css",
+			spritePercentageSize: 1,
+		},
+		{
+			directory:            "./assets/client-versions",
+			iconNamePrefix:       "client-version-med-",
+			spriteImageFile:      "./assets/sprites/client-versions-med.png",
+			spriteCssFile:        "./assets/sprites/client-versions-med.css",
+			spritePercentageSize: .5,
+		},
 	}
 
 	// loop through spriteSheets
