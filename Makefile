@@ -70,7 +70,7 @@ build: ##@build Builds the project, zip all files
 	@echo "Building..."
 	@echo "Zipping files..."
 	rm -f ./build.zip
-	@zip -r ./build.zip ./assets ./index.html ./manifest.json ./sw.js ./LICENSE ./README.md \
+	@zip -r ./build.zip ./assets ./package.json \
 		-x assets/npc_models/**\* \
 		-x assets/objects/**\* \
 		-x assets/faces/**\* \
