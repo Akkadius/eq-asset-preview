@@ -65,3 +65,16 @@ build-maps: ##@build Builds JSON file maps
 	tree ./assets/player-animations -f -J --sort=name | jq -c > ./maps/player-animations.json
 	sed -i 's/"type":"file",//g' ./maps/*.json
 	@echo "Built maps!"
+
+build: ##@build Builds the project, zip all files
+	@echo "Building..."
+	@echo "Zipping files..."
+	rm -f ./build.zip
+	@zip -r ./build.zip ./assets ./index.html ./manifest.json ./sw.js ./LICENSE ./README.md \
+		-x assets/npc_models/**\* \
+		-x assets/objects/**\* \
+		-x assets/faces/**\* \
+		-x assets/item_icons/**\*
+	@echo "Done!"
+	@echo "Build size: $(shell du -sh ./build.zip | awk '{print $$1}')"
+	@echo "Build complete!"
